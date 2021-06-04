@@ -1,0 +1,43 @@
+{
+  "name": "@zazuko/rdf-converter",
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Zazuko GmbH",
+  "license": "AGPL",
+  "private": true,
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint --quiet . --ignore-path .eslintignore --ignore-path .gitignore",
+    "analyze": "lit-analyzer --strict --quiet",
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.14.4",
+    "@changesets/cli": "^2.16.0",
+    "@open-wc/building-webpack": "^2.13.46",
+    "@open-wc/eslint-config": "^4.3.0",
+    "deepmerge": "^4.2.2",
+    "es-dev-commonjs-transformer": "^0.2.0",
+    "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^11.0.0",
+    "lit-analyzer": "^1.2.1",
+    "raw-loader": "^4.0.2",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --quiet --fix",
+      "prettier --write"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zazuko/shacl-playground.git"
+  }
+}
