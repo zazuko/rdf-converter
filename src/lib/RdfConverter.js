@@ -74,7 +74,6 @@ export class RdfConverter extends LitElement {
   }
 
   __updateOutput(e) {
-    console.log(e);
     this.output.updateValue(e.target.value);
   }
 }
