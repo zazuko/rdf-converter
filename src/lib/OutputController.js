@@ -1,6 +1,7 @@
 export class OutputController {
-  constructor(host) {
+  constructor(host, { prefixes = [] } = {}) {
     this.host = host;
+    this.prefixes = prefixes;
     host.addController(this);
   }
 

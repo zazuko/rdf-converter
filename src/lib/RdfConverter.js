@@ -35,7 +35,9 @@ export class RdfConverter extends LitElement {
   constructor() {
     super();
     this.input = new InputController(this);
-    this.output = new OutputController(this);
+    this.output = new OutputController(this, {
+      prefixes: "schema"
+    });
   }
 
   get inputEditorReady() {
@@ -63,6 +65,7 @@ export class RdfConverter extends LitElement {
             formats="application/trig,text/turtle,application/ld+json,application/rdf+xml"
             .inputFormat="${this.input.format}"
             .input="${this.output.value}"
+            .prefixes="${this.output.prefixes}"
             style="width: 50%"
           ></rdf-snippet>
         </vaadin-split-layout>
