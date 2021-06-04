@@ -17,11 +17,7 @@ module.exports = merge(
     module: {
       rules: [
         {
-          test: /\.jsonld$/,
-          use: ["raw-loader"]
-        },
-        {
-          test: /\.ttl$/,
+          test: /\.nq$/,
           use: ["raw-loader"]
         }
       ]

@@ -12,6 +12,13 @@
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production"
   },
+  "dependencies": {
+    "@rdfjs-elements/rdf-editor": "^0.4.4",
+    "@rdfjs-elements/rdf-snippet": "^0.3.1",
+    "@vaadin/vaadin": "^20.0.1",
+    "lit": "^2.0.0-rc.2",
+    "tbbt-ld": "^1.1.0"
+  },
   "devDependencies": {
     "@babel/preset-env": "^7.14.4",
     "@changesets/cli": "^2.16.0",
