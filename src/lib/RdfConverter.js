@@ -36,8 +36,13 @@ export class RdfConverter extends LitElement {
     super();
     this.input = new InputController(this);
     this.output = new OutputController(this, {
-      prefixes: "schema"
+      prefixes: ["schema"]
     });
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    import("./components/prefix-list.js");
   }
 
   get inputEditorReady() {
@@ -50,6 +55,13 @@ export class RdfConverter extends LitElement {
         <vaadin-drawer-toggle
           slot="navbar [touch-optimized]"
         ></vaadin-drawer-toggle>
+
+        <prefix-list
+          slot="drawer"
+          .selected="${this.output.prefixes}"
+          @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
+          @prefix-unselected="${e => this.output.removePrefix(e.detail.value)}"
+        ></prefix-list>
 
         <vaadin-split-layout>
           <rdf-editor
@@ -65,7 +77,7 @@ export class RdfConverter extends LitElement {
             formats="application/trig,text/turtle,application/ld+json,application/rdf+xml"
             .inputFormat="${this.input.format}"
             .input="${this.output.value}"
-            .prefixes="${this.output.prefixes}"
+            .prefixes="${this.output.prefixes.join(",")}"
             style="width: 50%"
           ></rdf-snippet>
         </vaadin-split-layout>
