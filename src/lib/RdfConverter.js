@@ -5,6 +5,7 @@ import "@vaadin/vaadin-split-layout/vaadin-split-layout.js";
 import "@rdfjs-elements/rdf-editor/rdf-editor.js";
 import "@rdfjs-elements/rdf-snippet/rdf-snippet.js";
 import "@vaadin/vaadin-app-layout/vaadin-drawer-toggle.js";
+import "@vaadin/vaadin-form-layout/vaadin-form-layout.js";
 import { InputController } from "./InputController.js";
 import { OutputController } from "./OutputController.js";
 
@@ -29,6 +30,10 @@ export class RdfConverter extends LitElement {
       rdf-snippet {
         height: 100%;
       }
+
+      vaadin-form-layout {
+        margin: 0 20px;
+      }
     `;
   }
 
@@ -36,17 +41,17 @@ export class RdfConverter extends LitElement {
     super();
     this.input = new InputController(this);
     this.output = new OutputController(this, {
-      prefixes: ["schema"]
+      prefixes: ["schema"],
+      customPrefixes: {
+        person: "http://localhost:8080/data/person/"
+      }
     });
   }
 
   connectedCallback() {
     super.connectedCallback();
     import("./components/prefix-list.js");
-  }
-
-  get inputEditorReady() {
-    return this.renderRoot.querySelector("rdf-editor").ready;
+    import("./components/custom-prefixes.js");
   }
 
   render() {
@@ -56,12 +61,20 @@ export class RdfConverter extends LitElement {
           slot="navbar [touch-optimized]"
         ></vaadin-drawer-toggle>
 
-        <prefix-list
-          slot="drawer"
-          .selected="${this.output.prefixes}"
-          @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
-          @prefix-unselected="${e => this.output.removePrefix(e.detail.value)}"
-        ></prefix-list>
+        <vaadin-form-layout slot="drawer">
+          <prefix-list
+            .selected="${this.output.prefixes}"
+            @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
+            @prefix-unselected="${e =>
+              this.output.removePrefix(e.detail.value)}"
+          ></prefix-list>
+
+          <custom-prefixes
+            @custom-prefix-set="${e =>
+              this.output.setCustomPrefix(e.detail.prefix, e.detail.namespace)}"
+            .prefixes="${this.output.customPrefixes}"
+          ></custom-prefixes>
+        </vaadin-form-layout>
 
         <vaadin-split-layout>
           <rdf-editor
@@ -78,6 +91,7 @@ export class RdfConverter extends LitElement {
             .inputFormat="${this.input.format}"
             .input="${this.output.value}"
             .prefixes="${this.output.prefixes.join(",")}"
+            .customPrefixes="${this.output.customPrefixes}"
             style="width: 50%"
           ></rdf-snippet>
         </vaadin-split-layout>

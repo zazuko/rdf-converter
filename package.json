@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@rdfjs-elements/rdf-editor": "^0.4.4",
-    "@rdfjs-elements/rdf-snippet": "^0.3.1",
+    "@rdfjs-elements/rdf-snippet": "^0.3.2",
     "@vaadin/vaadin": "^20.0.1",
     "@zazuko/rdf-vocabularies": "^2021.5.3",
     "lit": "^2.0.0-rc.2",

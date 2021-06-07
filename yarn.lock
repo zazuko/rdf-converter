@@ -1488,9 +1488,9 @@
   integrity sha512-VIcqRv68V/s0NS6bFy58CcsHwV0UCM/DHhAc1MYLB/yue1nyhKsX4uyu/SB5gbbY2r4BIH4G6O+arxf59KzgwQ==
 
 "@rdfjs-elements/editor-base@^0.3.0":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@rdfjs-elements/editor-base/-/editor-base-0.3.1.tgz#fb91eaf1cbefb64be875d61dccec70c4503e8c50"
-  integrity sha512-NDl0Xhqw9sICXNlVJU8pQUJxOSiwN+96jybKVSBOQC3nn7rsGHPQeYYVRZYhem6/OoP6ZOxg0ANG4/LiD8DVXA==
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@rdfjs-elements/editor-base/-/editor-base-0.3.2.tgz#edb329e5b798c2d1e012f752fc4d9388ba040928"
+  integrity sha512-2+VKqQhf+KVAVo9ehTNDhZm+A/oI4lmf3p3v58XlIIRBtI2JDEBtrmIf9T76eszMm+sReKUUX9QitcrHQtXnBA==
   dependencies:
     "@tpluscode/rdf-ns-builders" "^0.4.0"
     "@vanillawc/wc-codemirror" "^1.9.7"
@@ -1527,10 +1527,10 @@
     readable-stream "^3"
     string-to-stream "^3.0.1"
 
-"@rdfjs-elements/rdf-snippet@^0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@rdfjs-elements/rdf-snippet/-/rdf-snippet-0.3.1.tgz#c28e4021187032409819a5cd961913357d63c2ba"
-  integrity sha512-LlCLVBMsolgIRA90yp+MPvaQk3X6Y2MFy6QX5jMrQDVJeejk5bbuRNOzFanQm9bR9542P4Ky6qvhLV5R8oYQcw==
+"@rdfjs-elements/rdf-snippet@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@rdfjs-elements/rdf-snippet/-/rdf-snippet-0.3.2.tgz#c1eb9ed8a9cc5b6459b8768fa762edc62244a23e"
+  integrity sha512-uhY6gvFjBW4hmN8Kp2qUqCMxKZ5KCUD9RoGTbQkIX/Os3GRY3cc22iEJ0P2eGt+4o5E+jLfFwksVnqeosz0PXA==
   dependencies:
     "@rdfjs-elements/rdf-editor" "^0.4.0"
     lit-element "^2.3.1"

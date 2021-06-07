@@ -9,7 +9,6 @@ export class InputController {
       this.value = tbbt.default;
       this.format = "application/n-quads";
 
-      await this.host.inputEditorReady;
       this.host.requestUpdate();
     });
   }
