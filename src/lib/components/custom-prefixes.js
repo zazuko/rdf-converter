@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { css, html, LitElement } from "lit";
 import "@vaadin/vaadin-text-field/vaadin-text-field.js";
 import "@vaadin/vaadin-button/vaadin-button.js";

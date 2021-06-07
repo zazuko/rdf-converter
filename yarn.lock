@@ -1516,10 +1516,10 @@
     "@tpluscode/rdf-ns-builders" "^0.4.2"
     readable-stream "^3.6.0"
 
-"@rdfjs-elements/rdf-editor@^0.4.0", "@rdfjs-elements/rdf-editor@^0.4.4":
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/@rdfjs-elements/rdf-editor/-/rdf-editor-0.4.4.tgz#34c9372c1fa0e469e1f8035bb2feb772b6573d47"
-  integrity sha512-OFKoilLVC1oy+qFIZWSff7XIggCJ5NTwlvfFC6Zqo6zDU27XHzsme9WTxLkxt70FFrbgdIs8kLdfGU54uPQibg==
+"@rdfjs-elements/rdf-editor@^0.4.0", "@rdfjs-elements/rdf-editor@^0.4.5":
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/@rdfjs-elements/rdf-editor/-/rdf-editor-0.4.5.tgz#33650af6e243853378fb91a2aea7e1abfcce2fe9"
+  integrity sha512-0AodWwwIWNV31BnS+Wc+KkHVxvVtUi7nhApUuab6G5hup2ArfX0XHt0mwJLqjlvCPTArF6ZKYoMCurqxdSEEVg==
   dependencies:
     "@rdf-esm/data-model" "^0.5.4"
     "@rdfjs-elements/editor-base" "^0.3.0"
@@ -6964,7 +6964,14 @@ lit-html@^2.0.0-rc.3:
   dependencies:
     "@types/trusted-types" "^1.0.1"
 
-lit@^2.0.0-rc.2:
+lit-vaadin-helpers@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/lit-vaadin-helpers/-/lit-vaadin-helpers-0.1.3.tgz#6230ffdb90f7808d087107f18e83f14d64f0f5d5"
+  integrity sha512-fEUJEVzC1IluUbOOExBYuwal/DyhZqheIvtDV/Tlnmbq1NFtIjgybFQuFNXAyHDaaVwuKDijTGP1c3wwf9rg8w==
+  dependencies:
+    lit "^2.0.0-rc.1"
+
+lit@^2.0.0-rc.1, lit@^2.0.0-rc.2:
   version "2.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/lit/-/lit-2.0.0-rc.2.tgz#724a2d621aa098001d73bf7106f3a72b7b5948ef"
   integrity sha512-BOCuoJR04WaTV8UqTKk09cNcQA10Aq2LCcBOiHuF7TzWH5RNDsbCBP5QM9sLBSotGTXbDug/gFO08jq6TbyEtw==

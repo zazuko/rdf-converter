@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { css, html, LitElement } from "lit";
 import "@vaadin/vaadin-app-layout/vaadin-app-layout.js";
 import "@vaadin/vaadin-split-layout/vaadin-split-layout.js";
@@ -50,6 +49,7 @@ export class RdfConverter extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    import("./components/input-format.js");
     import("./components/prefix-list.js");
     import("./components/custom-prefixes.js");
   }
@@ -62,6 +62,11 @@ export class RdfConverter extends LitElement {
         ></vaadin-drawer-toggle>
 
         <vaadin-form-layout slot="drawer">
+          <input-format
+            .selected="${this.input.format}"
+            @selected-changed="${e => this.input.setFormat(e.detail.value)}"
+          ></input-format>
+
           <prefix-list
             .selected="${this.output.prefixes}"
             @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
@@ -82,6 +87,7 @@ export class RdfConverter extends LitElement {
             .value="${this.input.value}"
             .format="${this.input.format}"
             auto-parse
+            no-reserialize
             @quads-changed="${this.__updateOutput}"
           ></rdf-editor>
 

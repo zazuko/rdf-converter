@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { css, html, LitElement } from "lit";
 import prefixes from "@zazuko/rdf-vocabularies/prefixes";
 import "@vaadin/vaadin-form-layout/vaadin-form-item.js";

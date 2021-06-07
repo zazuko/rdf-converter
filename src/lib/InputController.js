@@ -12,4 +12,9 @@ export class InputController {
       this.host.requestUpdate();
     });
   }
+
+  async setFormat(format) {
+    this.format = format;
+    this.host.requestUpdate();
+  }
 }
