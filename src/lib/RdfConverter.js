@@ -50,6 +50,7 @@ export class RdfConverter extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     import("./components/input-format.js");
+    import("./components/external-input.js");
     import("./components/prefix-list.js");
     import("./components/custom-prefixes.js");
   }
@@ -66,6 +67,10 @@ export class RdfConverter extends LitElement {
             .selected="${this.input.format}"
             @selected-changed="${e => this.input.setFormat(e.detail.value)}"
           ></input-format>
+
+          <external-input
+            @import-url="${e => this.input.loadInput(e.detail.value)}"
+          ></external-input>
 
           <prefix-list
             .selected="${this.output.prefixes}"
