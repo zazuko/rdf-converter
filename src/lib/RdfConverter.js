@@ -28,11 +28,37 @@ export class RdfConverter extends LitElement {
 
       rdf-editor,
       rdf-snippet {
-        height: 100%;
+        flex: 1;
       }
 
       vaadin-form-layout {
         margin: 0 20px;
+      }
+
+      section {
+        display: flex;
+        flex-direction: column;
+      }
+
+      section header {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 100;
+        display: flex;
+        align-items: baseline;
+        padding: 0 10px;
+      }
+
+      span.error {
+        font-size: small;
+        color: red;
+        padding-left: 10px;
+      }
+
+      span.error a {
+        text-decoration: none;
+        color: inherit;
       }
     `;
   }
@@ -84,32 +110,59 @@ export class RdfConverter extends LitElement {
         </vaadin-form-layout>
 
         <vaadin-split-layout>
-          <rdf-editor
-            style="width: 50%"
-            .value="${this.input.value}"
-            .format="${this.input.format}"
-            auto-parse
-            no-reserialize
-            @quads-changed="${this.__updateOutput}"
-            @prefixes-parsed="${this.__setPrefixes}"
-          ></rdf-editor>
+          <section id="input" style="width: 50%">
+            <header>
+              <h2>
+                Input
+              </h2>
+              <span class="error" ?hidden="${!this.input.hasError}">
+                Parsing failed
+                <a href="#" @click="${this.__manualParse}" title="Parse again"
+                  >⟳</a
+                >
+              </span>
+            </header>
 
-          <rdf-snippet
-            only-output
-            formats="text/turtle,application/ld+json,application/trig,application/rdf+xml"
-            .inputFormat="${this.input.format}"
-            .input="${this.output.value}"
-            .prefixes="${this.output.prefixes.join(",")}"
-            .customPrefixes="${this.output.customPrefixes}"
-            style="width: 50%"
-          ></rdf-snippet>
+            <rdf-editor
+              .value="${this.input.value}"
+              .format="${this.input.format}"
+              auto-parse
+              no-reserialize
+              @quads-changed="${this.__updateOutput}"
+              @parsing-failed="${this.__parsingFailed}"
+              @prefixes-parsed="${this.__setPrefixes}"
+            ></rdf-editor>
+          </section>
+
+          <section id="output" style="width: 50%">
+            <header>
+              <h2>Output</h2>
+            </header>
+            <rdf-snippet
+              only-output
+              formats="text/turtle,application/ld+json,application/trig,application/rdf+xml"
+              .inputFormat="${this.input.format}"
+              .input="${this.output.value}"
+              .prefixes="${this.output.prefixes.join(",")}"
+              .customPrefixes="${this.output.customPrefixes}"
+            ></rdf-snippet>
+          </section>
         </vaadin-split-layout>
       </vaadin-app-layout>
     `;
   }
 
   __updateOutput(e) {
+    this.input.hasError = false;
     this.output.updateValue(e.target.value);
+  }
+
+  __parsingFailed() {
+    this.input.hasError = true;
+  }
+
+  __manualParse() {
+    this.renderRoot.querySelector("rdf-editor").parse();
   }
 
   __setPrefixes(e) {

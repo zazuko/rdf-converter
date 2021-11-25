@@ -1,10 +1,22 @@
 import { parsers } from "@rdfjs-elements/formats-pretty";
 import MediaType from "http-media-type";
 
+const HasError = Symbol("hasError");
+
 export class InputController {
   constructor(host) {
     this.host = host;
+    this[HasError] = false;
     host.addController(this);
+  }
+
+  get hasError() {
+    return this[HasError];
+  }
+
+  set hasError(value) {
+    this[HasError] = value;
+    this.host.requestUpdate();
   }
 
   async loadSample() {
