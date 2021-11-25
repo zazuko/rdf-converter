@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@rdfjs-elements/formats-pretty": "^0.4",
-    "@rdfjs-elements/rdf-editor": "^0.5",
+    "@rdfjs-elements/rdf-editor": "^0.5.2",
     "@rdfjs-elements/rdf-snippet": "^0.4.0",
     "@vaadin/vaadin": "^21",
     "@zazuko/rdf-vocabularies": ">=2021",
