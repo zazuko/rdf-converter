@@ -7,7 +7,7 @@ export class InputController {
     host.addController(this);
   }
 
-  hostConnected() {
+  async loadSample() {
     import("tbbt-ld/dist/tbbt.nq").then(async tbbt => {
       this.value = tbbt.default;
       this.format = "application/n-quads";

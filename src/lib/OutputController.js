@@ -1,3 +1,9 @@
+import knownPrefixes from "@zazuko/rdf-vocabularies/prefixes";
+
+const namespaceMap = new Map(
+  Object.entries(knownPrefixes).map(([k, v]) => [v, k])
+);
+
 export class OutputController {
   get prefixes() {
     return [...this.__prefixes.values()];
@@ -38,5 +44,25 @@ export class OutputController {
   setCustomPrefix(prefix, namespace) {
     this.__customPrefixes.set(prefix, namespace);
     this.host.requestUpdate();
+  }
+
+  setPrefixes(prefixes) {
+    this.__prefixes.clear();
+    this.__customPrefixes.clear();
+
+    for (const [prefix, namespaceOrString] of Object.entries(prefixes)) {
+      const namespace =
+        typeof namespaceOrString === "string"
+          ? namespaceOrString
+          : namespaceOrString.value;
+
+      if (prefix in knownPrefixes) {
+        this.addPrefix(prefix);
+      } else if (namespaceMap.has(namespace)) {
+        this.addPrefix(namespaceMap.get(namespace));
+      } else {
+        this.setCustomPrefix(prefix, namespace);
+      }
+    }
   }
 }

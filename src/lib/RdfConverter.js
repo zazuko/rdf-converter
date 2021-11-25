@@ -5,6 +5,7 @@ import "@rdfjs-elements/rdf-editor/rdf-editor.js";
 import "@rdfjs-elements/rdf-snippet/rdf-snippet.js";
 import "@vaadin/vaadin-app-layout/vaadin-drawer-toggle.js";
 import "@vaadin/vaadin-form-layout/vaadin-form-layout.js";
+import "@vaadin/vaadin-lumo-styles/typography";
 import { InputController } from "./InputController.js";
 import { OutputController } from "./OutputController.js";
 
@@ -36,6 +37,10 @@ export class RdfConverter extends LitElement {
     `;
   }
 
+  get prefixes() {
+    return this.renderRoot.querySelector("prefixes-menu");
+  }
+
   constructor() {
     super();
     this.input = new InputController(this);
@@ -51,8 +56,7 @@ export class RdfConverter extends LitElement {
     super.connectedCallback();
     import("./components/input-format.js");
     import("./components/external-input.js");
-    import("./components/prefix-list.js");
-    import("./components/custom-prefixes.js");
+    import("./components/prefixes-menu.js");
   }
 
   render() {
@@ -72,18 +76,7 @@ export class RdfConverter extends LitElement {
             @import-url="${e => this.input.loadInput(e.detail.value)}"
           ></external-input>
 
-          <prefix-list
-            .selected="${this.output.prefixes}"
-            @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
-            @prefix-unselected="${e =>
-              this.output.removePrefix(e.detail.value)}"
-          ></prefix-list>
-
-          <custom-prefixes
-            @custom-prefix-set="${e =>
-              this.output.setCustomPrefix(e.detail.prefix, e.detail.namespace)}"
-            .prefixes="${this.output.customPrefixes}"
-          ></custom-prefixes>
+          <prefixes-menu .output="${this.output}"></prefixes-menu>
         </vaadin-form-layout>
 
         <vaadin-split-layout>
@@ -94,6 +87,7 @@ export class RdfConverter extends LitElement {
             auto-parse
             no-reserialize
             @quads-changed="${this.__updateOutput}"
+            @prefixes-parsed="${this.__setPrefixes}"
           ></rdf-editor>
 
           <rdf-snippet
@@ -112,5 +106,11 @@ export class RdfConverter extends LitElement {
 
   __updateOutput(e) {
     this.output.updateValue(e.target.value);
+  }
+
+  __setPrefixes(e) {
+    if (this.prefixes.copyFromInput) {
+      this.output.setPrefixes(e.detail.prefixes);
+    }
   }
 }
