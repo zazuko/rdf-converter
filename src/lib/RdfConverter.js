@@ -158,7 +158,9 @@ export class RdfConverter extends LitElement {
   }
 
   __parsingFailed() {
-    this.input.hasError = true;
+    if (this.input.format) {
+      this.input.hasError = true;
+    }
   }
 
   __manualParse() {
