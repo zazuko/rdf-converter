@@ -98,7 +98,7 @@ export class RdfConverter extends LitElement {
 
           <rdf-snippet
             only-output
-            formats="application/trig,text/turtle,application/ld+json,application/rdf+xml"
+            formats="text/turtle,application/ld+json,application/trig,application/rdf+xml"
             .inputFormat="${this.input.format}"
             .input="${this.output.value}"
             .prefixes="${this.output.prefixes.join(",")}"
