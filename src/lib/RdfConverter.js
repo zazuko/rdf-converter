@@ -72,7 +72,15 @@ export class RdfConverter extends LitElement {
             @load-sample="${this.__prepareSample}"
           ></external-input>
 
-          <prefixes-menu .output="${this.output}"></prefixes-menu>
+          <prefixes-menu
+            .prefixes="${this.output.prefixes}"
+            .customPrefixes="${this.output.customPrefixes}"
+            @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
+            @prefix-unselected="${e =>
+              this.output.removePrefix(e.detail.value)}"
+            @custom-prefix-set="${e =>
+              this.output.setCustomPrefix(e.detail.prefix, e.detail.namespace)}"
+          ></prefixes-menu>
         </vaadin-form-layout>
 
         <vaadin-split-layout>

@@ -18,7 +18,8 @@ class PrefixesMenu extends LitElement {
 
   static get properties() {
     return {
-      output: { type: Object },
+      prefixes: { type: Array },
+      customPrefixes: { type: Object },
       copyFromInput: { type: Boolean }
     };
   }
@@ -43,16 +44,12 @@ class PrefixesMenu extends LitElement {
 
       <prefix-list
         ?hidden="${this.copyFromInput}"
-        .selected="${this.output.prefixes}"
-        @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
-        @prefix-unselected="${e => this.output.removePrefix(e.detail.value)}"
+        .selected="${this.prefixes}"
       ></prefix-list>
 
       <custom-prefixes
         ?hidden="${this.copyFromInput}"
-        @custom-prefix-set="${e =>
-          this.output.setCustomPrefix(e.detail.prefix, e.detail.namespace)}"
-        .prefixes="${this.output.customPrefixes}"
+        .prefixes="${this.customPrefixes}"
       ></custom-prefixes>
     `;
   }
