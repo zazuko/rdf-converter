@@ -19,10 +19,10 @@ export class OutputController {
     }, {});
   }
 
-  constructor(host, { prefixes = [], customPrefixes = {} } = {}) {
+  constructor(host) {
     this.host = host;
-    this.__prefixes = new Set(prefixes);
-    this.__customPrefixes = new Map(Object.entries(customPrefixes));
+    this.__prefixes = new Set();
+    this.__customPrefixes = new Map();
     host.addController(this);
   }
 

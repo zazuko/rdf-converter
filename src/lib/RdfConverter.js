@@ -44,12 +44,7 @@ export class RdfConverter extends LitElement {
   constructor() {
     super();
     this.input = new InputController(this);
-    this.output = new OutputController(this, {
-      prefixes: ["schema"],
-      customPrefixes: {
-        person: "http://localhost:8080/data/person/"
-      }
-    });
+    this.output = new OutputController(this);
   }
 
   connectedCallback() {
@@ -74,6 +69,7 @@ export class RdfConverter extends LitElement {
 
           <external-input
             @import-url="${e => this.input.loadInput(e.detail.value)}"
+            @load-sample="${this.__prepareSample}"
           ></external-input>
 
           <prefixes-menu .output="${this.output}"></prefixes-menu>
@@ -112,5 +108,12 @@ export class RdfConverter extends LitElement {
     if (this.prefixes.copyFromInput) {
       this.output.setPrefixes(e.detail.prefixes);
     }
+  }
+
+  __prepareSample() {
+    this.prefixes.copyFromInput = false;
+    this.output.addPrefix("schema");
+    this.output.setCustomPrefix("person", "http://localhost:8080/data/person/");
+    this.input.loadSample();
   }
 }
