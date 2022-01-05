@@ -6,8 +6,10 @@ import "@rdfjs-elements/rdf-snippet/rdf-snippet.js";
 import "@vaadin/vaadin-app-layout/vaadin-drawer-toggle.js";
 import "@vaadin/vaadin-form-layout/vaadin-form-layout.js";
 import "@vaadin/vaadin-lumo-styles/typography";
+import TermSet from "@rdf-esm/term-set";
 import { InputController } from "./InputController.js";
 import { OutputController } from "./OutputController.js";
+import { extractPrefix } from "./prefixes.js";
 
 export class RdfConverter extends LitElement {
   static get styles() {
@@ -50,13 +52,16 @@ export class RdfConverter extends LitElement {
         padding: 0 10px;
       }
 
-      span.error {
+      span.manual {
         font-size: small;
-        color: red;
         padding-left: 10px;
       }
 
-      span.error a {
+      span.error {
+        color: red;
+      }
+
+      span.manual a {
         text-decoration: none;
         color: inherit;
       }
@@ -106,6 +111,7 @@ export class RdfConverter extends LitElement {
               this.output.removePrefix(e.detail.value)}"
             @custom-prefix-set="${e =>
               this.output.setCustomPrefix(e.detail.prefix, e.detail.namespace)}"
+            @change="${this.__manualParse}"
           ></prefixes-menu>
         </vaadin-form-layout>
 
@@ -115,7 +121,7 @@ export class RdfConverter extends LitElement {
               <h2>
                 Input
               </h2>
-              <span class="error" ?hidden="${!this.input.hasError}">
+              <span class="manual error" ?hidden="${!this.input.hasError}">
                 Parsing failed
                 <a href="#" @click="${this.__manualParse}" title="Parse again"
                   >⟳</a
@@ -163,19 +169,39 @@ export class RdfConverter extends LitElement {
     }
   }
 
+  get __inputEditor() {
+    return this.renderRoot.querySelector("rdf-editor");
+  }
+
   __manualParse() {
-    this.renderRoot.querySelector("rdf-editor").parse();
+    this.__inputEditor.parse();
   }
 
   __setPrefixes(e) {
     if (this.prefixes.copyFromInput) {
       this.output.setPrefixes(e.detail.prefixes);
     }
+    if (this.prefixes.extractKnown) {
+      const uniqueTerms = new TermSet();
+
+      for (const { subject, predicate, object, graph } of this.__inputEditor
+        .quads) {
+        for (const term of [subject, predicate, object, graph]) {
+          if (!uniqueTerms.has(term)) {
+            const prefix = extractPrefix(term);
+            if (prefix) {
+              this.output.addPrefix(prefix);
+            }
+          }
+
+          uniqueTerms.add(term);
+        }
+      }
+    }
   }
 
   __prepareSample() {
     this.prefixes.copyFromInput = false;
-    this.output.addPrefix("schema");
     this.output.setCustomPrefix("person", "http://localhost:8080/data/person/");
     this.input.loadSample();
   }

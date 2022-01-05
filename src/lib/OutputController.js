@@ -1,8 +1,5 @@
 import knownPrefixes from "@zazuko/rdf-vocabularies/prefixes";
-
-const namespaceMap = new Map(
-  Object.entries(knownPrefixes).map(([k, v]) => [v, k])
-);
+import { namespaceMap } from "./prefixes.js";
 
 export class OutputController {
   get prefixes() {
@@ -50,6 +47,10 @@ export class OutputController {
     this.__prefixes.clear();
     this.__customPrefixes.clear();
 
+    this.addPrefixes(prefixes);
+  }
+
+  addPrefixes(prefixes) {
     for (const [prefix, namespaceOrString] of Object.entries(prefixes)) {
       const namespace =
         typeof namespaceOrString === "string"

@@ -13,6 +13,7 @@
     "build": "webpack --mode production"
   },
   "dependencies": {
+    "@rdf-esm/term-set": "^0.5.0",
     "@rdfjs-elements/formats-pretty": "^0.4",
     "@rdfjs-elements/rdf-editor": "^0.5.2",
     "@rdfjs-elements/rdf-snippet": "^0.4.0",
