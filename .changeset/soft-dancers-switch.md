@@ -1,5 +1,5 @@
 ---
-"@zazuko/rdf-converter": patch
+"@zazuko/rdf-converter": minor
 ---
 
-Namespace known to prefix.zazuko.com are now prefixed by default
+Namespaces known to prefix.zazuko.com are now prefixed by default
