@@ -8,6 +8,14 @@ export class InputController {
     this.host = host;
     this[HasError] = false;
     host.addController(this);
+
+    const restoreState = new URLSearchParams(window.location.hash.substr(1));
+    if (restoreState.has("value")) {
+      this.value = restoreState.get("value");
+    }
+    if (restoreState.has("format")) {
+      this.setFormat(restoreState.get("format"));
+    }
   }
 
   get hasError() {
@@ -45,7 +53,7 @@ export class InputController {
     this.host.requestUpdate();
   }
 
-  async setFormat(format) {
+  setFormat(format) {
     this.format = format;
     this.host.requestUpdate();
   }

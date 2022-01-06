@@ -85,6 +85,10 @@ export class RdfConverter extends LitElement {
     super();
     this.input = new InputController(this);
     this.output = new OutputController(this);
+
+    const url = new URL(document.location);
+    url.hash = "";
+    window.history.replaceState(null, "", url.toString());
   }
 
   connectedCallback() {
