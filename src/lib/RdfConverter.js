@@ -1,4 +1,4 @@
-import { css, html, LitElement } from "lit";
+import { css, html, LitElement, render } from "lit";
 import "@vaadin/vaadin-app-layout/vaadin-app-layout.js";
 import "@vaadin/vaadin-split-layout/vaadin-split-layout.js";
 import "@rdfjs-elements/rdf-editor/rdf-editor.js";
@@ -6,7 +6,9 @@ import "@rdfjs-elements/rdf-snippet/rdf-snippet.js";
 import "@vaadin/vaadin-app-layout/vaadin-drawer-toggle.js";
 import "@vaadin/vaadin-form-layout/vaadin-form-layout.js";
 import "@vaadin/vaadin-lumo-styles/typography";
+import "@vaadin/vaadin-button/vaadin-button.js";
 import TermSet from "@rdf-esm/term-set";
+import copy from "clipboard-copy";
 import { InputController } from "./InputController.js";
 import { OutputController } from "./OutputController.js";
 import { extractPrefix } from "./prefixes.js";
@@ -68,6 +70,13 @@ export class RdfConverter extends LitElement {
     `;
   }
 
+  static get properties() {
+    return {
+      sharingLink: { type: String },
+      sharingDialogOpen: { type: Boolean }
+    };
+  }
+
   get prefixes() {
     return this.renderRoot.querySelector("prefixes-menu");
   }
@@ -83,6 +92,8 @@ export class RdfConverter extends LitElement {
     import("./components/input-format.js");
     import("./components/external-input.js");
     import("./components/prefixes-menu.js");
+    import("@vaadin/vaadin-icons/vaadin-icons.js");
+    import("@polymer/iron-icon/iron-icon.js");
   }
 
   render() {
@@ -91,6 +102,15 @@ export class RdfConverter extends LitElement {
         <vaadin-drawer-toggle
           slot="navbar [touch-optimized]"
         ></vaadin-drawer-toggle>
+        <div slot="navbar" style="flex: 1"></div>
+        <vaadin-button
+          class="navbar"
+          slot="navbar [touch-optimized]"
+          title="Share"
+          @click="${this.__openSharingDialog}"
+        >
+          <iron-icon icon="vaadin:connect"></iron-icon>
+        </vaadin-button>
 
         <vaadin-form-layout slot="drawer">
           <input-format
@@ -155,6 +175,15 @@ export class RdfConverter extends LitElement {
           </section>
         </vaadin-split-layout>
       </vaadin-app-layout>
+
+      <vaadin-dialog
+        ?opened="${this.sharingDialogOpen}"
+        .renderer="${this.__renderSharingDialog(this)}"
+        @opened-changed="${e => {
+          this.sharingDialogOpen = e.detail.value;
+        }}"
+      >
+      </vaadin-dialog>
     `;
   }
 
@@ -204,5 +233,90 @@ export class RdfConverter extends LitElement {
     this.prefixes.copyFromInput = false;
     this.output.setCustomPrefix("person", "http://localhost:8080/data/person/");
     this.input.loadSample();
+  }
+
+  async __openSharingDialog() {
+    await import("@vaadin/vaadin-dialog/vaadin-dialog.js");
+    this.sharingDialogOpen = true;
+    this.sharingLinkShortened = false;
+    this.sharingLink = this.__getSharingLink();
+  }
+
+  __getSharingLink() {
+    const { value } = this.__inputEditor;
+    const { format } = this.input;
+
+    const params = new URLSearchParams({
+      value,
+      format
+    });
+
+    const url = new URL(document.location);
+    url.hash = params.toString();
+    return url.toString();
+  }
+
+  async __shortenSharingLink() {
+    if (this.sharingLinkShortened) {
+      return;
+    }
+
+    this.sharingLinkShortened = true;
+    const shortnenerUrl = "https://s.zazuko.com/api/v1/shorten";
+    const params = new URLSearchParams({
+      url: this.sharingLink
+    });
+    const response = await fetch(shortnenerUrl, {
+      method: "POST",
+      headers: {
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      body: params.toString()
+    });
+
+    this.sharingLink = await response.text();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  __renderSharingDialog(parent) {
+    /* eslint-disable lit/no-template-bind */
+    return root => {
+      let dialogContents;
+      if (!root.firstElementChild) {
+        dialogContents = document.createElement("div");
+        root.appendChild(dialogContents);
+      } else {
+        dialogContents = root.firstElementChild;
+      }
+
+      render(
+        html`
+          <vaadin-text-field
+            style="width:500px"
+            readonly
+            autoselect
+            label="Copy this URL to share playground"
+            .value="${parent.sharingLink}"
+          ></vaadin-text-field>
+          <br />
+          <vaadin-button
+            ?disabled="${parent.sharingLinkShortened}"
+            @click="${parent.__shortenSharingLink.bind(parent)}"
+          >
+            Shorten
+          </vaadin-button>
+          <vaadin-button @click="${parent.__copySharingLink.bind(parent)}">
+            <iron-icon icon="vaadin:copy"></iron-icon>
+          </vaadin-button>
+        `,
+        dialogContents
+      );
+
+      dialogContents.querySelector("vaadin-text-field")?.focus();
+    };
+  }
+
+  __copySharingLink() {
+    copy(this.sharingLink);
   }
 }
