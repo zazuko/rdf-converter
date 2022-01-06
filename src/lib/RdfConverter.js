@@ -263,15 +263,12 @@ export class RdfConverter extends LitElement {
 
     this.sharingLinkShortened = true;
     const shortnenerUrl = "https://s.zazuko.com/api/v1/shorten";
-    const params = new URLSearchParams({
+    const body = new URLSearchParams({
       url: this.sharingLink
     });
     const response = await fetch(shortnenerUrl, {
       method: "POST",
-      headers: {
-        "content-type": "application/x-www-form-urlencoded"
-      },
-      body: params.toString()
+      body
     });
 
     this.sharingLink = await response.text();
