@@ -67,6 +67,10 @@ export class RdfConverter extends LitElement {
         text-decoration: none;
         color: inherit;
       }
+
+      [role="button"][slot="navbar"] {
+        margin-right: 10px;
+      }
     `;
   }
 
