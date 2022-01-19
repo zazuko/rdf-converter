@@ -12,6 +12,7 @@ import copy from "clipboard-copy";
 import { InputController } from "./InputController.js";
 import { OutputController } from "./OutputController.js";
 import { extractPrefix } from "./prefixes.js";
+import Package from "../../package.json";
 
 export class RdfConverter extends LitElement {
   static get styles() {
@@ -118,6 +119,14 @@ export class RdfConverter extends LitElement {
           @click="${this.__openSharingDialog}"
         >
           <iron-icon icon="vaadin:connect"></iron-icon>
+        </vaadin-button>
+        <vaadin-button
+          class="navbar"
+          slot="navbar [touch-optimized]"
+          title="GitHub repo"
+          @click="${() => window.open(Package.repository.url, "_blank")}"
+        >
+          <iron-icon icon="vaadin:code"></iron-icon>
         </vaadin-button>
 
         <vaadin-form-layout slot="drawer">
