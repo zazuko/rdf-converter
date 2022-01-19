@@ -1,5 +1,11 @@
 # @zazuko/rdf-converter
 
+## 0.2.1
+
+### Patch Changes
+
+- 71ab838: GitHub link
+
 ## 0.2.0
 
 ### Minor Changes
