@@ -1,5 +1,12 @@
 # @zazuko/rdf-converter
 
+## 0.2.2
+
+### Patch Changes
+
+- 6a787ee: Added logo and title
+- ca4e1b3: Updated serializers (fixes issues with RDF Lists and literals in RDF/XML)
+
 ## 0.2.1
 
 ### Patch Changes
