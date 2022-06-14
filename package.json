@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@babel/preset-env": "^7.14.4",
-    "@changesets/cli": "^2.19.0",
+    "@changesets/cli": "^2.23.0",
     "@open-wc/building-webpack": "^2.13.46",
     "@open-wc/eslint-config": "^4.3.0",
     "deepmerge": "^4.2.2",
