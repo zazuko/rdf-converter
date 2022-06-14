@@ -7,7 +7,7 @@ import "@vaadin/vaadin-app-layout/vaadin-drawer-toggle.js";
 import "@vaadin/vaadin-form-layout/vaadin-form-layout.js";
 import "@vaadin/vaadin-lumo-styles/typography";
 import "@vaadin/vaadin-button/vaadin-button.js";
-import TermSet from "@rdf-esm/term-set";
+import TermSet from "@rdfjs/term-set";
 import copy from "clipboard-copy";
 import { InputController } from "./InputController.js";
 import { OutputController } from "./OutputController.js";
