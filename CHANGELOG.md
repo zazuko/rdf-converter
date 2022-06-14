@@ -1,5 +1,11 @@
 # @zazuko/rdf-converter
 
+## 0.2.3
+
+### Patch Changes
+
+- a20ca6e: Better serialize lists
+
 ## 0.2.2
 
 ### Patch Changes
