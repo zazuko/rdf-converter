@@ -1,14 +1,16 @@
 import { html, LitElement } from "lit";
-import { parsers } from "@rdfjs-elements/formats-pretty";
+import formats from "@rdfjs-elements/formats-pretty";
 import { selectRenderer } from "lit-vaadin-helpers";
 import "@vaadin/vaadin-select/vaadin-select.js";
 import "@vaadin/vaadin-list-box/vaadin-list-box.js";
 import "@vaadin/vaadin-item/vaadin-item.js";
 
+const { parsers } = formats;
+
 class InputFormat extends LitElement {
   static get properties() {
     return {
-      selected: { type: String }
+      selected: { type: String },
     };
   }
 
@@ -34,7 +36,7 @@ class InputFormat extends LitElement {
     this.selected = e.detail.value;
     this.dispatchEvent(
       new CustomEvent("selected-changed", {
-        detail: e.detail
+        detail: e.detail,
       })
     );
   }
@@ -43,10 +45,7 @@ class InputFormat extends LitElement {
     return html`
       <vaadin-list-box>
         ${this.formats.map(
-          format =>
-            html`
-              <vaadin-item>${format}</vaadin-item>
-            `
+          (format) => html` <vaadin-item>${format}</vaadin-item> `
         )}
       </vaadin-list-box>
     `;
