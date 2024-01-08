@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "prepare": "husky install",
+    "postinstall": "patch-package",
     "lint": "eslint --quiet . --ignore-path .eslintignore --ignore-path .gitignore",
     "analyze": "lit-analyzer --strict --quiet",
     "start": "webpack-dev-server --mode development",
@@ -15,9 +16,9 @@
   "dependencies": {
     "@polymer/iron-icon": "^3.0.1",
     "@rdfjs/term-set": "^2.0.1",
-    "@rdfjs-elements/formats-pretty": "^0.5.0",
-    "@rdfjs-elements/rdf-editor": "^0.5.3",
-    "@rdfjs-elements/rdf-snippet": "^0.4.1",
+    "@rdfjs-elements/formats-pretty": "^0.6.4",
+    "@rdfjs-elements/rdf-editor": "^0.5.5",
+    "@rdfjs-elements/rdf-snippet": "^0.4.3",
     "@vaadin/vaadin": "^21",
     "@zazuko/rdf-vocabularies": ">=2021",
     "clipboard-copy": "^4.0.1",
@@ -38,6 +39,7 @@
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
     "lit-analyzer": "^1.2.1",
+    "patch-package": "^8.0.0",
     "raw-loader": "^4.0.2",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
