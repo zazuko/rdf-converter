@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 18
 
       - run: npm ci
       - run: yarn changeset version
@@ -26,7 +26,7 @@ jobs:
           deploy_alias: ${{ env.BRANCH_NAME }}
           NETLIFY_DEPLOY_TO_PROD: false
           build_command: yarn build
-          node_version: 16
+          node_version: 18
 
       - name: Status check
         uses: Sibz/github-status-action@v1.1.1
