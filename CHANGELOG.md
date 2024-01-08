@@ -1,5 +1,11 @@
 # @zazuko/rdf-converter
 
+## 0.2.4
+
+### Patch Changes
+
+- 69a53e8: Fix parsing prefixes from JSON-LD with array of contexts (closes #25)
+
 ## 0.2.3
 
 ### Patch Changes

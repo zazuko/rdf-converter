@@ -1,6 +1,6 @@
 {
   "name": "@zazuko/rdf-converter",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "main": "index.js",
   "author": "Zazuko GmbH",
   "license": "AGPL",
