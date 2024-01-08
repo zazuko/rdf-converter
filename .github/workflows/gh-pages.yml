@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@master
-      - run: yarn install --frozen-lockfile
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - run: npm ci
       - run: yarn build
       - run: "echo 'converter.zazuko.com' > dist/CNAME"
       - name: GitHub Pages
