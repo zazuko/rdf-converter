@@ -1,5 +1,11 @@
 # @zazuko/rdf-converter
 
+## 0.2.5
+
+### Patch Changes
+
+- eedf02a: Aliased keywords were interpreted as prefixes (closes #31)
+
 ## 0.2.4
 
 ### Patch Changes
