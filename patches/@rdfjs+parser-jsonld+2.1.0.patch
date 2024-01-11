@@ -1,8 +1,16 @@
 diff --git a/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js b/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js
-index fcfe40a..6ddc25c 100644
+index fcfe40a..7ef06c7 100644
 --- a/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js
 +++ b/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js
-@@ -63,11 +63,19 @@ class ParserStream {
+@@ -4,6 +4,7 @@ import { JsonLdParser } from 'jsonld-streaming-parser'
+ import { Transform } from 'readable-stream'
+ 
+ const relativeIriProtocol = 'null:'
++const REGEX_KEYWORD = /^@[a-zA-Z]+$/;
+ 
+ function termCleanup (factory) {
+   return term => {
+@@ -63,11 +64,21 @@ class ParserStream {
        }
      })
  
@@ -18,7 +26,9 @@ index fcfe40a..6ddc25c 100644
 +
 +      if(typeof context === 'object') {
 +        Object.entries(context).forEach(([prefix, iri]) => {
-+          transform.emit('prefix', prefix, factory.namedNode(iri))
++          if(iri && !REGEX_KEYWORD.test(iri)) {
++            transform.emit('prefix', prefix, factory.namedNode(iri))
++          }
 +        })
 +      }
 +    }
