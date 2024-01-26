@@ -1,5 +1,11 @@
 # @zazuko/rdf-converter
 
+## 0.2.6
+
+### Patch Changes
+
+- 5986e40: When parsing JSON-LD, `@base` was incorrectly interpreted as prefix (fixes #36)
+
 ## 0.2.5
 
 ### Patch Changes
