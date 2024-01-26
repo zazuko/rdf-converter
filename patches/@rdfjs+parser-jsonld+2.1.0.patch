@@ -1,5 +1,5 @@
 diff --git a/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js b/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js
-index fcfe40a..7ef06c7 100644
+index fcfe40a..b47572a 100644
 --- a/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js
 +++ b/node_modules/@rdfjs/parser-jsonld/lib/ParserStream.js
 @@ -4,6 +4,7 @@ import { JsonLdParser } from 'jsonld-streaming-parser'
@@ -24,9 +24,9 @@ index fcfe40a..7ef06c7 100644
 +        return context.forEach(processContext)
 +      }
 +
-+      if(typeof context === 'object') {
++      if(typeof context === 'object') { 
 +        Object.entries(context).forEach(([prefix, iri]) => {
-+          if(iri && !REGEX_KEYWORD.test(iri)) {
++          if(iri && !REGEX_KEYWORD.test(iri) && !REGEX_KEYWORD.test(prefix)) {
 +            transform.emit('prefix', prefix, factory.namedNode(iri))
 +          }
 +        })
