@@ -96,7 +96,7 @@ export class RdfConverter extends LitElement {
   static get properties() {
     return {
       sharingLink: { type: String },
-      sharingDialogOpen: { type: Boolean }
+      sharingDialogOpen: { type: Boolean },
     };
   }
 
@@ -200,21 +200,21 @@ export class RdfConverter extends LitElement {
         <vaadin-form-layout slot="drawer">
           <input-format
             .selected="${this.input.format}"
-            @selected-changed="${e => this.input.setFormat(e.detail.value)}"
+            @selected-changed="${(e) => this.input.setFormat(e.detail.value)}"
           ></input-format>
 
           <external-input
-            @import-url="${e => this.input.loadInput(e.detail.value)}"
+            @import-url="${(e) => this.input.loadInput(e.detail.value)}"
             @load-sample="${this.__prepareSample}"
           ></external-input>
 
           <prefixes-menu
             .prefixes="${this.output.prefixes}"
             .customPrefixes="${this.output.customPrefixes}"
-            @prefix-selected="${e => this.output.addPrefix(e.detail.value)}"
-            @prefix-unselected="${e =>
+            @prefix-selected="${(e) => this.output.addPrefix(e.detail.value)}"
+            @prefix-unselected="${(e) =>
               this.output.removePrefix(e.detail.value)}"
-            @custom-prefix-set="${e =>
+            @custom-prefix-set="${(e) =>
               this.output.setCustomPrefix(e.detail.prefix, e.detail.namespace)}"
             @change="${this.__manualParse}"
           ></prefixes-menu>
@@ -223,9 +223,7 @@ export class RdfConverter extends LitElement {
         <vaadin-split-layout>
           <section id="input" style="width: 50%">
             <header>
-              <h2>
-                Input
-              </h2>
+              <h2>Input</h2>
               <span class="manual error" ?hidden="${!this.input.hasError}">
                 Parsing failed
                 <a href="#" @click="${this.__manualParse}" title="Parse again"
@@ -235,7 +233,7 @@ export class RdfConverter extends LitElement {
             </header>
 
             <rdf-editor
-              .value="${this.input.value}"
+              .value="${this.input.value || ""}"
               .format="${this.input.format}"
               auto-parse
               no-reserialize
@@ -264,7 +262,7 @@ export class RdfConverter extends LitElement {
       <vaadin-dialog
         ?opened="${this.sharingDialogOpen}"
         .renderer="${this.__renderSharingDialog(this)}"
-        @opened-changed="${e => {
+        @opened-changed="${(e) => {
           this.sharingDialogOpen = e.detail.value;
         }}"
       >
@@ -333,7 +331,7 @@ export class RdfConverter extends LitElement {
 
     const params = new URLSearchParams({
       value,
-      format
+      format,
     });
 
     const url = new URL(document.location);
@@ -349,11 +347,11 @@ export class RdfConverter extends LitElement {
     this.sharingLinkShortened = true;
     const shortnenerUrl = "https://s.zazuko.com/api/v1/shorten";
     const body = new URLSearchParams({
-      url: this.sharingLink
+      url: this.sharingLink,
     });
     const response = await fetch(shortnenerUrl, {
       method: "POST",
-      body
+      body,
     });
 
     this.sharingLink = await response.text();
@@ -362,7 +360,7 @@ export class RdfConverter extends LitElement {
   // eslint-disable-next-line class-methods-use-this
   __renderSharingDialog(parent) {
     /* eslint-disable lit/no-template-bind */
-    return root => {
+    return (root) => {
       let dialogContents;
       if (!root.firstElementChild) {
         dialogContents = document.createElement("div");
