@@ -1,5 +1,11 @@
 # @zazuko/rdf-converter
 
+## 0.2.7
+
+### Patch Changes
+
+- 78d6ca2: built with vite instead of webpack
+
 ## 0.2.6
 
 ### Patch Changes
