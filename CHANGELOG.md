@@ -1,5 +1,11 @@
 # @zazuko/rdf-converter
 
+## 0.2.8
+
+### Patch Changes
+
+- dab5454: Added RDFa parser
+
 ## 0.2.7
 
 ### Patch Changes
