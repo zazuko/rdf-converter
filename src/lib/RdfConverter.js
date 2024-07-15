@@ -1,4 +1,10 @@
 import { css, html, LitElement, render } from "lit";
+import TermSet from "@rdfjs/term-set";
+import copy from "clipboard-copy";
+import { InputController } from "./InputController.js";
+import { OutputController } from "./OutputController.js";
+import { extractPrefix } from "./prefixes.js";
+import Package from "../../package.json";
 import "@vaadin/vaadin-app-layout/vaadin-app-layout.js";
 import "@vaadin/vaadin-split-layout/vaadin-split-layout.js";
 import "@rdfjs-elements/rdf-editor/rdf-editor.js";
@@ -7,12 +13,6 @@ import "@vaadin/vaadin-app-layout/vaadin-drawer-toggle.js";
 import "@vaadin/vaadin-form-layout/vaadin-form-layout.js";
 import "@vaadin/vaadin-lumo-styles/typography";
 import "@vaadin/vaadin-button/vaadin-button.js";
-import TermSet from "@rdfjs/term-set";
-import copy from "clipboard-copy";
-import { InputController } from "./InputController.js";
-import { OutputController } from "./OutputController.js";
-import { extractPrefix } from "./prefixes.js";
-import Package from "../../package.json";
 
 export class RdfConverter extends LitElement {
   static get styles() {
