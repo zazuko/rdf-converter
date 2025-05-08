@@ -34,7 +34,6 @@
     "@changesets/cli": "^2.23.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@open-wc/eslint-config": "^7.0.0",
-    "es-dev-commonjs-transformer": "^0.2.0",
     "eslint": "^8.17.0",
     "eslint-config-prettier": "^8.5.0",
     "husky": "^6.0.0",
