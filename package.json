@@ -5,14 +5,14 @@
   "author": "Zazuko GmbH",
   "license": "AGPL",
   "type": "module",
-  "private": true,
   "scripts": {
     "prepare": "husky install",
     "postinstall": "patch-package",
     "lint": "eslint --quiet . --ignore-path .eslintignore --ignore-path .gitignore",
     "analyze": "lit-analyzer --strict --quiet",
     "start": "vite",
-    "build": "vite build --outDir ../dist"
+    "build": "vite build --outDir ../dist",
+    "publish": "changeset tag"
   },
   "dependencies": {
     "@polymer/iron-icon": "^3.0.1",
