@@ -11,7 +11,7 @@ import "@rdfjs-elements/rdf-editor/rdf-editor.js";
 import "@rdfjs-elements/rdf-snippet/rdf-snippet.js";
 import "@vaadin/vaadin-app-layout/vaadin-drawer-toggle.js";
 import "@vaadin/vaadin-form-layout/vaadin-form-layout.js";
-import "@vaadin/vaadin-lumo-styles/typography";
+import "@vaadin/vaadin-lumo-styles/typography.js";
 import "@vaadin/vaadin-button/vaadin-button.js";
 
 export class RdfConverter extends LitElement {
