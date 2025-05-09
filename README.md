@@ -4,7 +4,7 @@
 
 ## Run locally
 
-You will need [node and NPM](https://nodejs.org/en/download), then simply run `nppm start -- --open`. The app will open in the browser 
+You will need [node and NPM](https://nodejs.org/en/download), then simply run `npm start -- --open`. The app will open in the browser 
 
 ## Build and deploy
 
