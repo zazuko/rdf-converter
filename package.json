@@ -20,7 +20,7 @@
     "@rdfjs-elements/rdf-editor": "^0.5.7",
     "@rdfjs-elements/rdf-snippet": "^0.4.3",
     "@rdfjs/term-set": "^2.0.1",
-    "@vaadin/vaadin": "^22",
+    "@vaadin/vaadin": "^24",
     "@zazuko/formats-lazy": "^1.0.1",
     "@zazuko/rdf-vocabularies": ">=2021",
     "clipboard-copy": "^4.0.1",
